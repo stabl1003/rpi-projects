@@ -1,0 +1,43 @@
+general {
+    colors = true
+    color_good = '#4df130'
+    color_degraded = '#e7a210'
+    color_bad = '#e73710'
+    interval = 1
+}
+
+order += "ethernet _first_"
+order += "wireless _first_"
+order += "disk /"
+order += "load"
+order += "memory"
+order += "tztime local"
+
+ethernet _first_ {
+        format_up = "E: %ip (%speed)"
+        format_down = "E: down"
+}
+
+wireless _first_ {
+        format_up = "W: (%quality at %essid) %ip"
+        format_down = "W: down"
+}
+
+disk "/" {
+        format = "%avail"
+}
+
+load {
+        format = "%1min"
+}
+
+memory {
+        format = "%used | %available"
+        threshold_degraded = "1G"
+        format_degraded = "MEMORY < %available"
+}
+
+tztime local {
+        format = "%Y-%m-%d %H:%M:%S"
+}
+
